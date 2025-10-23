@@ -318,6 +318,8 @@ typedef void (^SVProgressHUDDismissCompletion)(void);
 /// @param motionEffectEnabled A boolean that determines if motion effects are enabled.
 + (void)setMotionEffectEnabled:(BOOL)motionEffectEnabled;
 
+/// sets customview
++ (void)setCustomAnimationView:(nonnull UIView*)customAnimationView;
 
 #pragma mark - Show Methods
 

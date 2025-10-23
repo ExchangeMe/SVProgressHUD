@@ -241,6 +241,9 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
     [self sharedView].motionEffectEnabled = motionEffectEnabled;
 }
 
++ (void)setCustomAnimationView:(UIView *)customAnimationView {
+    [self sharedView].customAnimationView = customAnimationView;
+}
 #pragma mark - Show Methods
 
 + (void)show {
