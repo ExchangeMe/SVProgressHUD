@@ -1079,7 +1079,7 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
             // 没自定义 干脆不要吧
             _indefiniteAnimatedView = [UIView new];
         } else {
-            if(_indefiniteAnimatedView){
+            if(_indefiniteAnimatedView && ![_indefiniteAnimatedView isKindOfClass:[self.customAnimationView class]]){
                 [_indefiniteAnimatedView removeFromSuperview];
                 _indefiniteAnimatedView = nil;
             }
