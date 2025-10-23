@@ -1056,7 +1056,7 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
         indefiniteAnimatedView.strokeColor = self.foregroundImageColorForStyle;
         indefiniteAnimatedView.strokeThickness = self.ringThickness;
         indefiniteAnimatedView.radius = self.statusLabel.text ? self.ringRadius : self.ringNoTextRadius;
-    } else {
+    } else if (self.defaultAnimationType == SVProgressHUDAnimationTypeNative) {
         // Check if spinner exists and is an object of different class
         if(_indefiniteAnimatedView && ![_indefiniteAnimatedView isKindOfClass:[UIActivityIndicatorView class]]){
             [_indefiniteAnimatedView removeFromSuperview];
@@ -1070,6 +1070,20 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
         // Update styling
         UIActivityIndicatorView *activityIndicatorView = (UIActivityIndicatorView*)_indefiniteAnimatedView;
         activityIndicatorView.color = self.foregroundImageColorForStyle;
+    } else if (self.defaultAnimationType == SVProgressHUDAnimationTypeCustom) {
+        // Check if spinner exists and is an object of different class
+        if (!_customAnimationView) {
+            // 没自定义 干脆不要吧
+            _indefiniteAnimatedView = [UIView new];
+        } else {
+            if(_indefiniteAnimatedView){
+                [_indefiniteAnimatedView removeFromSuperview];
+                _indefiniteAnimatedView = nil;
+            }
+            if (!_indefiniteAnimatedView) {// 自定义视图
+                _indefiniteAnimatedView = self.customAnimationView;
+            }
+        }
     }
     [_indefiniteAnimatedView sizeToFit];
     
@@ -1523,4 +1537,8 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
     if (!_isInitializing) _maxSupportedWindowLevel = maxSupportedWindowLevel;
 }
 
+- (void)setCustomAnimationView:(UIView *)customAnimationView{
+    if (!_customAnimationView) _customAnimationView = customAnimationView;
+    _defaultAnimationType = SVProgressHUDAnimationTypeCustom;
+}
 @end

@@ -56,7 +56,10 @@ typedef NS_ENUM(NSUInteger, SVProgressHUDAnimationType) {
     SVProgressHUDAnimationTypeFlat NS_SWIFT_NAME(flat),
     
     /// iOS native UIActivityIndicatorView.
-    SVProgressHUDAnimationTypeNative NS_SWIFT_NAME(native)
+    SVProgressHUDAnimationTypeNative NS_SWIFT_NAME(native),
+    
+    /// iOS Custom UIActivityIndicatorView.
+    SVProgressHUDAnimationTypeCustom NS_SWIFT_NAME(custom) // 新增
 };
 
 typedef void (^SVProgressHUDShowCompletion)(void);
@@ -144,6 +147,10 @@ typedef void (^SVProgressHUDDismissCompletion)(void);
 /// A specific view for extensions. This property is only used if #define SV_APP_EXTENSIONS is set.
 /// @discussion Default: nil.
 @property (strong, nonatomic, nonnull) UIView *viewForExtension UI_APPEARANCE_SELECTOR;
+
+/// A custom view for SVProgressHUDAnimationTypeCustom. need startAnimating/stopAnimating
+/// @discussion Default: nil.
+@property (strong, nonatomic, nonnull) UIView *customAnimationView UI_APPEARANCE_SELECTOR;
 
 /// The interval in seconds to wait before displaying the HUD. If the HUD is displayed before this time elapses, this timer is reset.
 /// @discussion Default: 0 seconds.
